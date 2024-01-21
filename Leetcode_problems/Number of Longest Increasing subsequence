@@ -1,0 +1,38 @@
+//TC:O(N*N)
+//SC:O(N+N)
+class Solution {
+    public int findNumberOfLIS(int[] a) {
+        int n=a.length;
+        int dp[]=new int[n];
+        int ct[]=new int[n];
+        int totct=0;
+        int mx=0;
+        for(int i=0;i<=n-1;i++)
+        {   dp[i]=1;
+            ct[i]=1;
+            for(int prev=0;prev<i;prev++)
+            {
+                if(a[prev]<a[i] && dp[prev]+1>dp[i])
+                {
+                    dp[i]=1+dp[prev];
+                    ct[i]=ct[prev];
+                }
+                else if(a[prev]<a[i]&&dp[prev]+1==dp[i])
+                {
+                    ct[i]+=ct[prev];
+                }
+            }
+            mx=Math.max(mx,dp[i]);
+            
+        }
+        System.out.println(mx);
+        for(int i=0;i<n;i++)
+        {
+            if(dp[i]==mx)
+            {
+                totct+=ct[i];
+            }
+        }
+        return totct;
+    }
+}
