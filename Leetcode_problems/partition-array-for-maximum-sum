@@ -1,0 +1,23 @@
+//TC:O(N*K)
+//SC:O(N).
+class Solution {
+    public int maxSumAfterPartitioning(int[] arr, int k) {
+        int n=arr.length;
+        int dp[]=new int[n+1];
+        for(int i=n-1;i>=0;i--)
+        {
+            int len=0;
+            int maxele=0;
+            int maxsm=0;
+            for(int j=i;j<Math.min(n,i+k);j++)
+            {
+                len+=1;
+                maxele=Math.max(maxele,arr[j]);
+                int sm=(len*maxele)+dp[j+1];
+                maxsm=Math.max(maxsm,sm);
+            }
+            dp[i]=maxsm;
+        }
+        return dp[0];
+    }
+}
