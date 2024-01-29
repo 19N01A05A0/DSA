@@ -1,0 +1,29 @@
+//tc:o(d)+o(n-d)+o(n)=o(2n)=o(n)
+//sc:o(1)
+class Solution {
+    void reverse(int[] a,int start,int end)
+    {
+        while(start<=end)
+        {
+            int temp=a[start];
+            a[start]=a[end];
+            a[end]=temp;
+            start+=1;
+            end-=1;
+        }
+    }
+    public void rotate(int[] nums, int k) {
+        int n=nums.length;
+        k=k%n;
+        if(k<0)
+        {
+            k+=n;
+        }
+        reverse(nums,0,n-k-1);
+        
+        reverse(nums,n-k,n-1);
+        
+        reverse(nums,0,n-1);
+        
+    }
+}
