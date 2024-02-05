@@ -1,0 +1,34 @@
+//tc:o(N)+O(N)
+//SC:O(N)
+class Solution {
+    public int firstUniqChar(String s) {
+        LinkedHashMap<Character,Integer> lhm=new LinkedHashMap<>();
+        int ind=-1;
+        char letter='@';
+        for(int i=0;i<s.length();i++)
+        {   char ch=s.charAt(i);
+            if(lhm.containsKey(ch))
+            {
+                lhm.put(ch,lhm.get(ch)+1);
+            }
+            else
+            {
+                lhm.put(ch,1);
+            }
+        }
+        for(Map.Entry<Character,Integer> hm:lhm.entrySet())
+        {
+            if(hm.getValue()==1)
+            {
+                System.out.println(hm.getKey());
+                letter=hm.getKey();
+                break;
+            }
+        }
+        if(letter!='@')
+        {
+            return s.indexOf(letter);
+        }
+        return -1;
+    }
+}
