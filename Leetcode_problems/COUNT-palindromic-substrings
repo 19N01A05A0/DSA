@@ -1,0 +1,29 @@
+//TC:O(N*N)
+//SC:O(1)
+class Solution {
+     public int countSubstrings(String s) {
+        int res=0;
+        int n=s.length();
+        for(int i=0;i<n;i++)
+        {   //odd length palindrme
+            int l=i;
+            int r=i;
+            while(l>=0 && r<n && s.charAt(l)==s.charAt(r))
+            {
+                res+=1;
+                l--;
+                r++;
+            }
+            //even length palindrome
+            l=i;
+            r=i+1;
+            while(l>=0 && r<n && s.charAt(l)==s.charAt(r))
+            {
+                res+=1;
+                l--;
+                r++;
+            }
+        }
+        return res;
+    }
+}
