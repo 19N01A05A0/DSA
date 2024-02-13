@@ -1,0 +1,24 @@
+//TC:O(N*N)
+class Solution {
+    public List<Integer> type2(int row)
+    {
+        List<Integer> sl=new ArrayList<>();
+        int ans=1;
+        sl.add(1);
+        for(int col=1;col<row;col++)
+        {
+            ans=ans*(row-col);
+            ans=ans/col;
+            sl.add(ans);
+        }
+        return sl;
+    }
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> bl=new ArrayList<>();
+        for(int i=1;i<=numRows;i++)
+        {
+            bl.add(type2(i));
+        }
+        return bl;
+    }
+}
