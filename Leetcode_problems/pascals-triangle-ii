@@ -1,0 +1,15 @@
+class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> sl=new ArrayList<>();
+        long ans=1;
+        sl.add(1);
+        for(int col=1;col<=rowIndex;col++)
+        {
+            ans=ans*(rowIndex-col+1);
+            ans=ans/col;
+            sl.add((int)ans);
+        }
+        return sl;
+        
+    }
+}
