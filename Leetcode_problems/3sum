@@ -1,0 +1,46 @@
+//TC:O(nlOGn)+o(n*n)
+//sc: O(no. of quadruplets)
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        int n=nums.length;
+        Arrays.sort(nums);
+        List<List<Integer>> ans=new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {   if(i!=0 && nums[i]==nums[i-1]) continue;
+            int j=i+1;
+            int k=n-1;
+            
+            while(j<k)
+            {
+                int sm=nums[i]+nums[j]+nums[k];
+                if(sm<0)
+                {
+                    j++;
+                }
+                else if(sm>0)
+                {
+                    k--;
+                }
+                else
+                {   
+                    List<Integer> sl=new ArrayList<>();
+                    sl.add(nums[i]);
+                    sl.add(nums[j]);
+                    sl.add(nums[k]);
+                    j++;
+                    k--;
+                    if(j!=0 && nums[j-1]==nums[j]){j++;}
+                    if(k!=0 && nums[k-1]==nums[k]){k++;}
+                   // System.out.println(sl+""+ans.contains(sl));
+                    if(!ans.contains(sl))
+                    {
+                        ans.add(sl);
+                    }
+                    
+                }
+            }
+            
+        }
+    return ans;
+    }
+}
