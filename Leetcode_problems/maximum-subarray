@@ -1,0 +1,35 @@
+//BRUTE:O(N*N)
+//OPTIMAL O(N)
+class Solution {
+   /* public int maxSubArray(int[] nums) {
+        int n=nums.length;
+        int mx=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++)
+        {   int sm=0;
+            for(int j=i;j<n;j++)
+            {
+                sm+=nums[j];
+                mx=Math.max(sm,mx);
+            }
+        }
+        return mx;
+    }*/
+    public int maxSubArray(int[] nums) {
+        int n=nums.length;
+        int mx=Integer.MIN_VALUE;
+        int sm=0;
+        for(int i=0;i<n;i++)
+        {   
+            sm+=nums[i];
+            if(sm>mx)
+            {
+                mx=sm;
+            }
+            if(sm<0)
+            {
+                sm=0;
+            }
+        }
+        return mx;
+    }
+}
