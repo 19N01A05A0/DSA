@@ -1,5 +1,7 @@
+//BRUTE:O(N*N)
+//OPTIMAL:O(N)
 class Solution {
-    public int maxProduct(int[] nums) {
+    /*public int maxProduct(int[] nums) {
         int n=nums.length;
         int mxprd=nums[0];
         for(int i=0;i<n;i++)
@@ -9,6 +11,28 @@ class Solution {
                 prd*=nums[j];
                 mxprd=Math.max(prd,mxprd);
             }
+        }
+        return mxprd;
+    }*/
+    public int maxProduct(int[] nums) {
+        int n=nums.length;
+        int pre=1;
+        int suff=1;
+        int mxprd=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++)
+        {   
+
+            if(pre==0)
+            {
+                pre=1;
+            }
+            if(suff==0)
+            {
+                suff=1;
+            }
+            pre=pre*nums[i];
+            suff=suff*nums[n-i-1];
+            mxprd=Math.max(mxprd,Math.max(pre,suff));
         }
         return mxprd;
     }
