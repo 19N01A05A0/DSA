@@ -1,0 +1,77 @@
+class Solution {
+    //BRUTE
+    //TC:O(2*(N+M))
+    //SC:O(N+M)
+    /*public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int thirdarr[]=new int[m+n];
+        int left=0;
+        int right=0;
+        int index=0;
+        while(left<m && right<n)
+        {
+            if(nums1[left]<=nums2[right])
+            {
+                thirdarr[index]=nums1[left];
+                left++;
+                index++;
+            }
+            else
+            {
+                thirdarr[index]=nums2[right];
+                right++;
+                index++;
+            }
+        }
+        while(left<m)
+        {
+            thirdarr[index++]=nums1[left++];
+        }
+        while(right<n)
+        {
+            thirdarr[index++]=nums2[right++];
+        }
+        for(int i=0;i<m+n;i++)
+        {
+            if(i<m)
+            {
+                nums1[i]=thirdarr[i];
+            }
+            //else CHNGD ACC TO LEETCODE QNS
+            {
+                nums1[i]=thirdarr[i];
+                System.out.println(thirdarr[i]+" "+nums2[i-m]);
+            }
+            
+            else 
+            {
+                nums2[i-m]=thirdarr[i];
+                System.out.println(thirdarr[i]+" "+nums2[i-m]);
+            }
+        }*/
+        //OPTIMAL
+        //TC:O(MIN(N,M))+O(NLONGN)+O(MLOGM)
+        //SC:O(1)
+        public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int left=m-1;
+        int right=0;
+        int index=0;
+        while(left>=0 && right<n)
+        {
+            if(a[left]>a[right])
+            {
+                int temp=a[left];
+                a[left]=a[right];
+                a[right]=temp;
+                left--;
+                right++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        }
+    }
+}
