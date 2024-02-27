@@ -1,0 +1,26 @@
+//TC:O(2N)
+ //SC:O(N)//stck spce
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        List<Integer> al=new ArrayList<>();
+        inorder(al,root);
+        for(int i=1;i<al.size();i++)
+        {
+            if(al.get(i-1)>=al.get(i))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public void inorder(List<Integer> al, TreeNode root)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        inorder(al,root.left);
+        al.add(root.val);
+        inorder(al,root.right);
+    }
+}
