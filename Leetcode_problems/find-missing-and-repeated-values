@@ -1,0 +1,29 @@
+//TC:O(N*N)
+//SC:O(1)
+class Solution {
+    public int[] findMissingAndRepeatedValues(int[][] grid) {
+        int len=grid.length*grid.length;
+        int ans[]=new int[2];
+        int ind=0;
+        long s1=0;
+        long s2=0;
+        for(int i=0;i<grid.length;i++)
+        {
+            for(int j=0;j<grid[0].length;j++)
+            {
+                s1+=grid[i][j];
+                s2+=(long)grid[i][j]*(long)grid[i][j];
+            }
+        }
+        long sn=(len*(len+1))/2;
+        long sn2=(len*(len+1)*(2*len+1))/6;
+        long val1=s1-sn;//x1-y1
+        long val2=s2-sn2;
+        val2=val2/val1;//x2-y2
+        long x=(val1+val2)/2;
+        long y=x-val1;
+        ans[0]=(int)x;
+        ans[1]=(int)y;
+        return ans;
+    }
+}
