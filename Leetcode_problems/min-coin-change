@@ -1,0 +1,79 @@
+//tc:o(2^n)
+//sc:o(n)
+/*class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int ans=helper(coins,amount,coins.length-1);
+        if(ans>=(int)Math.pow(10,9))
+        {
+            return -1;
+        }
+        else
+        {
+            return ans;
+        }
+    }
+    public int helper(int[] coins, int amount,int ind)
+    {   if(ind==0){
+       // System.out.println(amount%coins[0]);
+        if(amount%coins[0]==0)
+        {
+            return amount/coins[0];
+        }
+        else
+        {
+            return (int)Math.pow(10,9);
+        }
+    }
+        int nottake=0+helper(coins,amount,ind-1);
+        int take=(int)Math.pow(10,9);
+        if(coins[ind]<=amount)
+        {
+            take=1+helper(coins,amount-coins[ind],ind);
+        }
+        return Math.min(take,nottake);
+    }
+}*/
+//tc:o(n*t)
+//sc:o(n*t)
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int n=coins.length;
+        int dp[][]=new int[n][amount+1];
+        for(int t=0;t<=amount;t++)
+        {
+            if(t%coins[0]==0)
+            {
+                dp[0][t]=t/coins[0];
+            }
+            else
+            {
+                dp[0][t]=(int)Math.pow(10,9);
+            }
+            System.out.println(dp[0][t]);
+        }
+        //System.out.println(dp[0][0]);
+        for(int i=1;i<n;i++)
+        {
+            for(int t=0;t<=amount;t++)
+            {   int nottake=0+dp[i-1][t];
+                int take=(int)Math.pow(10,9);
+                if(coins[i]<=t)
+                {
+                   take=1+dp[i][t-coins[i]];
+                }
+                dp[i][t]=Math.min(take,nottake);
+            }
+        }
+        int ans=dp[n-1][amount];
+        System.out.println(ans);
+        if(ans>=(int)Math.pow(10,9))
+        {
+            return -1;
+        }
+        else
+        {
+            return ans;
+        }
+    }
+    
+}
