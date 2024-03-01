@@ -1,0 +1,43 @@
+import java.util.*;
+//TC:O(2^N)
+//SC:O(N)//stck
+class Solution {
+    public int lengthOfLIS(int[] a) {
+        int n=a.length;
+        return helper(0,-1,a,n);
+    }
+    public int helper(int ind, int prev,int[] a,int n)
+    {
+        if(ind==n)
+        {
+            return 0;
+        }
+        int nottake=0+helper(ind+1,prev,a,n);
+        int take=0;
+        if(prev==-1||a[ind]>a[prev])
+        {
+            take=1+helper(ind+1,ind,a,n);
+        }
+        return Math.max(take,nottake);
+    }
+}
+//tc:o(n*n)
+//sc:o(n)
+/*class Solution {
+    public int lengthOfLIS(int[] a) {
+        int n=a.length;
+        int dp[]=new int[n];
+        Arrays.fill(dp,1);
+        for(int i=0;i<n;i++)
+        {
+            for(int prev=0;prev<=i-1;prev++)
+            {
+                if(a[prev]<a[i])
+                {
+                    dp[i]=Math.max(dp[i],1+dp[prev]);
+                }
+            }
+        }
+        return dp[n-1];
+    }
+}*/
