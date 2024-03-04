@@ -1,0 +1,22 @@
+//tc:o(n)
+//sc:o(1)
+class Solution {
+    public boolean canJump(int[] nums) {
+        int flag=nums.length-1;
+        for(int ind=nums.length-2;ind>=0;ind--)
+        {
+            if(ind+nums[ind]>=flag)
+            {
+                flag=ind;
+            }
+        }
+        if(flag==0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
