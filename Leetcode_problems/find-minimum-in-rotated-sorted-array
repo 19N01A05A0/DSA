@@ -1,0 +1,24 @@
+//tc:o(logn)
+//sc:o(1)
+class Solution {
+    public int findMin(int[] a) {
+        int low=0;
+        int high=a.length-1;
+        int mn=Integer.MAX_VALUE;
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(a[low]<=a[mid])
+            {
+                mn=Math.min(mn,a[low]);
+                low=mid+1;
+            }
+            else
+            {
+                mn=Math.min(mn,a[mid]);
+                high=mid-1;
+            }
+        }
+        return mn;
+    }
+}
