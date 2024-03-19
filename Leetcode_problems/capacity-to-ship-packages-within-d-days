@@ -1,0 +1,60 @@
+//tc:o(n*log(sum(arr)-max(arr)))
+//sc:o(1)
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int low=find_max(weights);
+        int high=sum(weights);
+        while(low<=high)
+        {
+            int mid=(low+high)/2;
+            if(days_took(weights,mid)<=days)
+            {
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return low;
+    }
+    public int find_max(int[] weights)
+    {
+        int mx=0;
+        for(int i=0;i<weights.length;i++)
+        {
+            if(weights[i]>mx)
+            {
+                mx=weights[i];
+            }
+        }
+        return mx;
+    }
+    public int sum(int[] weights)
+    {
+        int sm=0;
+        for(int i=0;i<weights.length;i++)
+        {
+            sm+=weights[i];
+        }
+        return sm;
+    }
+    public int days_took(int[] weights,int cap)
+    {
+        int days=1;
+        int load=0;
+        for(int i=0;i<weights.length;i++)
+        {
+            if(load+weights[i]>cap)
+            {
+                days+=1;
+                load=weights[i];
+            }
+            else
+            {
+                load+=weights[i];
+            }
+        }
+        return days;
+    }
+}
