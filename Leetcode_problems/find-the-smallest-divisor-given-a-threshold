@@ -1,0 +1,42 @@
+//tc:o(n)+o(log(max(arr))*n)
+//sc:o(1)
+class Solution {
+    public int smallestDivisor(int[] nums, int threshold) {
+        int mx=find_max(nums,0);
+        System.out.println(mx);
+        int low=1,high=mx;
+        while(low<=high)
+        {   
+            int mid=(low+high)/2;
+            if(sum(nums,mid)<=threshold)
+            {
+                high=mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return low;
+    }
+    public int find_max(int[] nums,int mx)
+    {
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]>mx)
+            {
+                mx=nums[i];
+            }
+        }
+        return mx;
+    }
+    public int sum(int[] nums,int div)
+    {   
+        int sm=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            sm+=Math.ceil((double)nums[i]/(double)div);
+        }
+        return sm;
+    }
+}
