@@ -1,0 +1,33 @@
+//tc:o((2^n)*k)
+//sc:o(k*x)
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {       Arrays.sort(candidates);
+        List<List<Integer>> al=new ArrayList<>();
+        Arrays.sort(candidates);
+        helper(candidates,target,0,al,new ArrayList<>());
+        return al;
+    }
+    public void helper(int[] candidates,int target,int index,List<List<Integer>> al, List<Integer> l)
+    {   
+         if(target==0)
+            {
+                al.add(new ArrayList<>(l));
+                return;
+            }
+            
+        for(int i=index;i<candidates.length;i++)
+        {
+            if(i!=index&&candidates[i]==candidates[i-1])
+            {
+                continue;
+            }
+            if(candidates[i]>target)
+            {
+                break;
+            }
+            l.add(candidates[i]);
+            helper(candidates,target-candidates[i],i+1,al,l);
+            l.remove(l.size()-1);
+        }
+    }
+}
