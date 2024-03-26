@@ -1,0 +1,25 @@
+//tc:o((2^n)*k)
+//sc:o((2^n)*k)
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> al=new ArrayList<>();
+        Arrays.sort(nums);
+        helper(nums,0,al,new ArrayList<>());
+        return al;
+    }
+    public void helper(int[] nums,int index,List<List<Integer>> al,List<Integer> l)
+    {   
+        al.add(new ArrayList<>(l));
+        for(int i=index;i<nums.length;i++)
+        {
+            if(i!=index&&nums[i]==nums[i-1])
+            {
+                continue;
+            }
+            l.add(nums[i]);
+            helper(nums,i+1,al,l);
+            l.remove(l.size()-1);
+        }
+    }
+    
+}
