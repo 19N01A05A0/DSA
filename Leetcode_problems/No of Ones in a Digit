@@ -1,0 +1,17 @@
+//tc:o(logn)
+class Solution {
+    public int hammingWeight(int n) {
+        int mask=1;
+        int ct=0;
+        while(n!=0)
+        {
+            int bit=n&1;
+            if(bit==1)
+            {
+                ct+=1;
+            }
+            n=n>>1;
+        }
+        return ct;
+    }
+}
