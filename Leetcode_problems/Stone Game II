@@ -1,0 +1,30 @@
+class Solution {
+    public int stoneGameII(int[] piles) {
+        int memo[][][]=new int[2][101][101];//1
+        for (int[][] arr2D : memo) {//2
+            for (int[] arr1D : arr2D) {
+                Arrays.fill(arr1D, -1);
+            }
+        }
+       return helper(piles,1,0,1,memo);//3
+    }
+    public static int helper(int[] piles,int person,int i,int m,int memo[][][]){
+        if(i>=piles.length)return 0;//bse cse for recrcn
+        if(memo[person][i][m]!=-1)return memo[person][i][m];//4 bfre calctng res findng it
+        int result=(person==1)?-1:Integer.MAX_VALUE;//since ds is once max and min
+        int stones=0;
+        for(int x=1;x<=Math.min(piles.length-i,2*m);x++)//min(n-i,2*m) while tkng 2*m , might exceed arry
+        {   
+            stones+=piles[i+x-1];//currpos+x//-1 coz index from 0
+            if(person==1)//alice, max and addng up val
+            {
+                result=Math.max(result,stones+helper(piles,0,i+x,Math.max(x,m),memo));
+            }
+            else//opponent so min and not adding up val
+            {
+                result=Math.min(result,helper(piles,1,i+x,Math.max(x,m),memo));
+            }
+        }
+        return  memo[person][i][m]=result;//5
+    }
+}
